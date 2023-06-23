@@ -1,0 +1,94 @@
+// singly linked
+#include<bits/stdc++.h>
+#include<iostream>
+
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node *link;
+    Node(int data){
+        this -> data = data;
+        this -> link = NULL;
+    }
+};
+
+void insertAtHead(Node * &head,int data){
+    if(head == NULL){
+        Node *newNode = new Node(data);
+        head = newNode;
+        return;
+    }
+    Node *newNode = new Node(data);
+    newNode -> link = head;
+    head = newNode;
+}
+
+void print(Node *head){
+    Node *temp = head;
+    while(temp != NULL){
+        cout<<temp -> data<<" ";
+        temp = temp -> link;
+    }
+    cout<<endl;
+}
+
+void insertAtTail(Node * &head,int data){
+    // if no nodes in the linked list
+    if(head == NULL){
+        Node *newNode = new Node(data);
+        head = newNode;
+    }
+    // This logic able to detact 1 node to
+    Node *newNode = new Node(data);
+    Node *temp = head;
+    Node *prevNode = NULL;
+    while(temp != NULL){
+        prevNode = temp;
+        temp = temp -> link;
+    }
+    prevNode -> link = newNode;
+}
+
+
+void insertAtPos(Node * &head,int pos,int data){
+    // if pos to enter is 1
+    if(pos == 1){
+        insertAtHead(head,data);
+        return ;
+    }
+    // int nodeCount = 0;
+    // Node *countTemp = head;
+    // while(countTemp != NULL){
+    //     nodeCount++;
+    //     countTemp = countTemp -> link;
+    // }
+    // // insert at pos last(tail)
+    // if(nodeCount == pos - 1){
+    //     insertAtTail(head,data);
+    // }
+    Node *newNode = new Node(data);
+    Node *temp = head;
+    for(int i = 1; i < pos - 1 ; i++){
+        temp = temp -> link;
+    }
+    newNode -> link = temp -> link;
+    temp -> link = newNode;
+}
+int main()
+{
+    Node *temp = new Node(10);
+    Node *head = temp;
+    print(head);
+    insertAtTail(head,20);
+    print(head);
+    // insertAtTail(head,600);
+    print(head);
+    insertAtPos(head,3,1);
+    print(head);
+    insertAtTail(head,1000);
+    print(head);
+    insertAtPos(head,4,5000);
+    print(head);
+}
