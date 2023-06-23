@@ -1,0 +1,115 @@
+// doubly circular linked list
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node {
+    public:
+    int data;
+    Node *prev;
+    Node *link;
+
+    Node(int data){
+        this -> data = data;
+        this -> prev = NULL;
+        this -> link = NULL;
+    }
+};
+
+void print(Node *head){
+    Node *temp = head;
+    do{
+        cout<<temp -> data<<" ";
+        temp = temp -> link;
+    }
+    while(temp != head);
+    cout<<endl;
+}
+
+void insertAtHead(Node * &head,int data){
+    if(head == NULL){
+        Node *newNode = new Node(data);
+        newNode -> link = newNode;
+        newNode -> prev = newNode;
+        head = newNode;
+        return ;
+    }
+    Node *newNode = new Node(data);
+    // finding tail of linked list
+    Node *tail = head;
+    Node *prevTail = NULL;
+    do{
+        prevTail = tail;
+        tail = tail -> link;
+    }
+    while(tail != head);
+    newNode -> link = head;
+    newNode -> prev = head -> prev;
+    head -> prev = newNode;
+    prevTail -> link = newNode;
+    head = newNode;
+}
+
+void insertAtTail(Node * &head, int data){
+    if(head == NULL){
+        Node *newNode = new Node(data);
+        newNode -> link = newNode;
+        newNode -> prev = newNode;
+        head = newNode;
+        return ;
+    }
+    Node *temp = head;
+    Node *prevNode = NULL;
+    Node *newNode = new Node(data);
+    do{
+        prevNode = temp;
+        temp = temp -> link;
+    }
+    while(temp != head);
+    prevNode -> link = newNode;
+    newNode -> prev = prevNode;
+    newNode -> link = head;
+    head -> prev = newNode;
+}
+
+void insertAtPos(Node * &head, int pos,int data) {
+    // if linked list is empty
+    if(pos == 1){
+        insertAtHead(head,data);
+        return ;
+    }
+    int nodeCount = 0;
+    Node *tempNode = head;
+    // insertion at end of list
+    do{
+        nodeCount++;
+        tempNode = tempNode -> link;
+    }
+    while(tempNode != head);
+    if(nodeCount == pos - 1){
+        insertAtTail(head,data);
+        return ;
+    }
+    Node *temp = head;
+    Node *newNode = new Node(data);
+    for(int i = 1 ; i < pos - 1 ; i++){
+        temp = temp -> link;
+    }
+    newNode -> link = temp -> link;
+    temp -> link -> prev = newNode;
+    newNode -> prev = temp;
+    temp -> link = newNode;
+}
+
+int main()
+{
+    Node *head = NULL;
+    insertAtTail(head,200);
+    print(head);
+    insertAtTail(head,300);
+    print(head);
+    insertAtTail(head,400);
+    print(head);
+    insertAtPos(head,4,350);
+    print(head);
+}
