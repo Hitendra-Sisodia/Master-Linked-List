@@ -1,0 +1,17 @@
+class Solution
+{
+    public:
+    //Function to count nodes of a linked list.
+    int findLength(struct Node *head){
+        struct Node* temp = head;
+        int nodeCount = 0;
+        while(temp != NULL){
+            nodeCount++;
+            temp = temp -> next;
+        }
+        return nodeCount;
+    }
+    int getCount(struct Node* head){
+        return findLength(head);
+    }
+};
