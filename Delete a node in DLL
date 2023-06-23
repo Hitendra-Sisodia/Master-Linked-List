@@ -1,0 +1,32 @@
+class Solution
+{
+    public:
+    void deletionAtPos(Node * &head,int pos) {
+        if(pos == 1){
+            Node *copy = head;
+            head = copy -> next;
+            copy -> prev = NULL;
+            delete(copy);
+            return ;
+        }
+        Node *temp = head;
+        Node *prevNode = NULL;
+        for(int i = 1 ; i < pos ; i++){
+            prevNode = temp;
+            temp = temp -> next;
+        }
+        if(temp -> next == NULL){
+            Node *copy = temp;
+            prevNode -> next = NULL;
+            delete(copy);
+            return ;
+        }
+        temp -> next -> prev = prevNode;
+        prevNode -> next = temp -> next;
+    }
+    Node* deleteNode(Node *head_ref, int x)
+    {
+      deletionAtPos(head_ref,x);
+      return head_ref;
+    }
+};
