@@ -1,0 +1,37 @@
+void deletionAtPos(Node * &head, int pos){
+    // deletion at head
+    if(pos == 1){
+        Node *temp = head;
+        head = temp -> next;
+        delete(temp);
+        return ;
+    }
+    // deleteion ar tail
+    Node *temp = head;
+    Node *prevNode = NULL;
+    int nodeCount = 0;
+    while(temp -> next != NULL){
+        nodeCount++;
+        prevNode = temp;
+        temp = temp -> next;
+    }
+    if(nodeCount == pos - 1){
+        prevNode -> next = NULL;
+        delete (temp);
+        return ;
+    }
+    temp = head;
+    for(int i = 1 ; i < pos - 1 ; i++){
+        temp = temp -> next;
+    }
+    Node *copy = temp -> next;
+    temp -> next =  copy -> next;
+    delete(copy);
+}
+
+/*You are required to complete below method*/
+Node* deleteNode(Node *head,int x)
+{
+    deletionAtPos(head,x);
+    return head;
+}
