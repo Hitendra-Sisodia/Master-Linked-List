@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    void insertAtTail(Node * &head,Node * &tail, int data){
+        if(head == NULL){
+            Node *newNode = new Node(data);
+            head = newNode;
+            tail = newNode;
+            return ;
+        }
+        Node *newNode = new Node(data);
+        
+        tail -> next = newNode;
+        newNode -> prev = tail;
+        tail = newNode;
+    }
+    Node* constructDLL(vector<int>& arr) {
+        Node *head = NULL;
+        Node *tail = NULL;
+        for(auto i: arr){
+            insertAtTail(head,tail,i);
+        }
+        return head;
+    }
+};
