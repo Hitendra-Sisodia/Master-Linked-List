@@ -1,0 +1,106 @@
+// singly circular 
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node {
+    public:
+    int data;
+    Node *link;
+    Node(int data){
+        this -> data = data;
+        this -> link = NULL;
+    }
+};
+
+void print(Node *head){
+    Node *temp = head;
+    do{
+        cout<<temp -> data<<" ";
+        temp = temp -> link;
+    }
+    while(temp != head);
+    cout<<endl;
+}
+
+void insertAtHead(Node * &head,int data){
+    if(head == NULL){
+        Node *newNode = new Node(data);
+        newNode -> link = newNode;
+        head = newNode;
+        return ;
+    }
+    Node *newNode = new Node(data);
+    Node *temp = head;
+    Node *prevNode = NULL;
+    do{
+        prevNode = temp;
+        temp = temp -> link;
+    }
+    while(temp != head);
+    newNode -> link = head;
+    prevNode -> link = newNode;
+    head = newNode;
+}
+
+void insertAtTail(Node * &head, int data){
+    if(head == NULL){
+        Node *newNode = new Node(data);
+        newNode -> link = newNode;
+        head = newNode;
+        return ;
+    }
+    Node *newNode = new Node(data);
+    Node *temp = head;
+    Node *prevNode = NULL;
+    do{
+        prevNode = temp;
+        temp = temp -> link;
+    }
+    while(temp != head);
+    prevNode -> link = newNode;
+    newNode -> link = head;
+}
+
+void insertAtPos(Node * &head, int pos,int data) {
+    // null head
+    if(head == NULL){
+        Node *newNode = new Node(data);
+        newNode -> link = newNode;
+        head = newNode;
+    }
+    // end push
+    int nodeCount = 0;
+    Node *nodeTemp = head;
+    do{
+        nodeCount++;
+        nodeTemp = nodeTemp -> link;
+    }
+    while(nodeTemp != head);
+    if(nodeCount == pos - 1){
+        insertAtTail(head, data);
+        return ;
+    }
+    Node *newNode = new Node(data);
+    Node *temp = head;
+    for(int i = 1 ; i < pos - 1 ; i++){
+        temp = temp -> link;
+    }
+    newNode -> link = temp -> link;
+    temp -> link = newNode;
+}
+
+int main()
+{
+    Node *temp = new Node(10);
+    Node *head = temp;
+    temp -> link = head;
+    insertAtHead(head,100);
+    print(head);
+    insertAtTail(head,200);
+    print(head);
+    insertAtPos(head,2,150);
+    print(head);
+    insertAtPos(head,5,10000);
+    print(head);
+}
