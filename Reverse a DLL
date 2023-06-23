@@ -1,0 +1,19 @@
+void reversenextedList(Node * &head) {
+    Node *temp = head;
+    Node *prevNode = NULL;
+    while(temp != NULL) {
+        // as simple like swapping two numbers
+        Node *copy = temp -> prev;
+        temp -> prev = temp -> next;
+        temp -> next = copy;
+        // store previous node value for pointing head to last node
+        prevNode = temp;
+        temp = temp -> prev;
+    }
+    head = prevNode;
+}
+
+Node* reverseDLL(Node * head) {
+    reversenextedList(head);
+    return head;
+}
