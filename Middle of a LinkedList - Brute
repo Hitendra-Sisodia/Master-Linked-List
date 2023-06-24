@@ -1,0 +1,29 @@
+class Solution{
+    public:
+    int getMiddleOp(Node *head) {
+        int nodeCount = 0;
+        Node *temp = head;
+        while(temp != NULL){
+            nodeCount++;
+            temp = temp -> next;
+        }
+        int count = 0;
+        // even case
+        if(nodeCount % 2 == 0){
+            count = (nodeCount/2)  + 1;
+        }
+        // odd case
+        else{
+            count = ((nodeCount + 1)/2);
+        }
+        temp = head;
+        for(int i = 1 ; i < count ; i++){
+            temp = temp -> next;
+        }
+        return (temp -> data);
+    }
+    int getMiddle(Node *head){
+        int ans = getMiddleOp(head);
+        return ans;
+    }
+};
