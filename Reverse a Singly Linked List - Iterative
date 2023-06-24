@@ -1,0 +1,18 @@
+class Solution {
+public:
+    ListNode* reversenextedList(ListNode *head) {
+        ListNode *temp = head;
+        ListNode *prevNodeCopy = NULL;
+        while(temp != NULL){
+            ListNode *currentNodeCopy = temp -> next;
+            temp -> next = prevNodeCopy;
+            prevNodeCopy = temp;
+            temp = currentNodeCopy;
+        }
+        head = prevNodeCopy;
+        return head;
+    }
+    ListNode* reverseList(ListNode* head) {
+        return reversenextedList(head);
+    }
+};
