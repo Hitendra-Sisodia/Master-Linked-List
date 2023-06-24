@@ -1,0 +1,21 @@
+class Solution
+{
+    public:
+    //Function to check if the linked list has a loop.
+    bool linkedListLoop(Node *head) {
+        map<Node *, bool> hash;
+        Node *temp = head;
+        while(temp != NULL){
+            if(hash[temp] == true){
+                return true;
+            }
+            hash[temp] = true;
+            temp = temp -> next;
+        }
+        return false;
+    }
+    bool detectLoop(Node* head)
+    {
+        return linkedListLoop(head);
+    }
+};
