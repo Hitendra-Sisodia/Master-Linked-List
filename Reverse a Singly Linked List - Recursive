@@ -1,0 +1,21 @@
+class Solution
+{
+    public:
+    struct Node *reversenextedList(struct Node *head, struct Node *prevNodeCopy) {
+        if(head == NULL){
+            head = prevNodeCopy;
+            return head;
+        }
+        Node *nextNodeCopy = head -> next;
+        head -> next = prevNodeCopy;
+        prevNodeCopy = head;
+        head = nextNodeCopy;
+        reversenextedList(head,prevNodeCopy);
+    }
+    struct Node* reverseList(struct Node *head)
+    {
+        struct Node *prevNodeCopy = NULL;
+        return reversenextedList(head , prevNodeCopy);
+    }
+};
+    
