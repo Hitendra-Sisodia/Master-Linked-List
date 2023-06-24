@@ -1,0 +1,21 @@
+class Solution
+{
+    public:
+    //Function to check if the linked list has a loop.
+    bool linkedListLoop(Node *head) {
+        Node *temp = head;
+        std::unordered_set<Node*> hash;
+        while(temp != NULL) {
+            if(hash.find(temp) != hash.end()){
+                return true;
+            }
+            hash.insert(temp);
+            temp = temp -> next;
+        }
+        return false;
+    }
+    bool detectLoop(Node* head)
+    {
+        return linkedListLoop(head);
+    }
+};
