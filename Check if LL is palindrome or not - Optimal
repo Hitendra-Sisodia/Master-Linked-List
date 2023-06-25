@@ -52,3 +52,6 @@ class Solution{
         return palindromeCheck(head);
    }
 };
+
+TC = O(N)
+SC = O(1)
