@@ -1,0 +1,29 @@
+int nodeCount(struct Node *head) {
+    Node *slow = head;
+    Node *fast = head;
+    int count = 0;
+    bool ans = false;
+    while(fast != NULL && fast -> next != NULL) {
+        slow = slow -> next;
+        fast = fast -> next -> next;
+        if(slow == fast){
+            ans = true;
+            break;
+        }
+    }
+    if(ans == false){
+        return 0;
+    }
+    while(slow){
+        slow = slow -> next;
+        count++;
+        if(slow == fast){
+            break;
+        }
+    }
+    return count;
+}
+int countNodesinLoop(struct Node *head)
+{
+    return nodeCount(head);
+}
