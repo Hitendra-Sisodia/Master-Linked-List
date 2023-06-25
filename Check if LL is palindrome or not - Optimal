@@ -1,0 +1,54 @@
+class Solution{
+    public:
+    //Function to check whether the list is palindrome.
+    Node *mid(Node *head) {
+        Node *slow = head;
+        Node *fast = head -> next;
+        while(fast != NULL && fast -> next != NULL) {
+            slow = slow -> next;
+            fast = fast -> next -> next;
+        }
+        return slow;
+    }
+    Node *reverse(Node *head){
+        Node *prevNode = NULL;
+        Node *currentNode = head;
+        Node *nextNode = NULL;
+        while(currentNode != NULL){
+            nextNode = currentNode -> next;
+            currentNode -> next = prevNode;
+            prevNode = currentNode;
+            currentNode = nextNode;
+        }
+        return prevNode;
+    }
+    bool palindromeCheck(Node *head){
+        Node *middle = mid(head);
+        Node *temp = middle -> next;
+        middle -> next = reverse(temp);
+        
+        Node *head1 = head;
+        Node *head2 = middle -> next;
+        if(head -> next == NULL){
+            return true;
+        }
+        if(head -> next -> next == NULL){
+            if(head -> data == head -> next -> data){
+                return true;
+            }
+            return false;
+        }
+        while(head1 && head2){
+            if(head1 -> data != head2 -> data){
+                return false;
+            }
+            head1 = head1 -> next;
+            head2 = head2 -> next;
+        }
+        middle -> next = reverse(temp);
+        return true;
+    }
+    bool isPalindrome(Node* head){
+        return palindromeCheck(head);
+   }
+};
