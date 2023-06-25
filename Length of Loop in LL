@@ -27,3 +27,7 @@ int countNodesinLoop(struct Node *head)
 {
     return nodeCount(head);
 }
+
+
+TC = O(N/2) + O(N/2)
+SC = O(1)
