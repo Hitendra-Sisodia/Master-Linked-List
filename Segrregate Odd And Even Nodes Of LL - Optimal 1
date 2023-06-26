@@ -1,0 +1,46 @@
+class Solution {
+public:
+    ListNode *segregateEvenAndOdd(ListNode *head) {
+        ListNode *evenStart = NULL;
+        ListNode *evenIterate = NULL;
+        ListNode *oddStart = NULL;
+        ListNode *oddIterate = NULL;
+
+        ListNode *current = head;
+        int count = 1;
+        while(current != NULL) {
+            if((count)%2 == 0){
+                if(evenStart == NULL){
+                    evenStart = current;
+                    evenIterate = evenStart;
+                }
+                else{
+                    evenIterate -> next = current;
+                    evenIterate = evenIterate -> next;
+                }
+            }
+            else{
+                if(oddStart == NULL) {
+                    oddStart = current;
+                    oddIterate = oddStart;
+                }
+                else{
+                    oddIterate -> next = current;
+                    oddIterate = oddIterate -> next;
+                }
+            }
+            count++;
+            current = current -> next;
+        }
+        if(evenStart == NULL || oddStart == NULL){
+            return head;
+        }
+        oddIterate -> next = evenStart;
+        evenIterate -> next = NULL;
+        head = oddStart;
+        return head;
+    }
+    ListNode* oddEvenList(ListNode* head) {
+        return segregateEvenAndOdd(head);
+    }
+};
