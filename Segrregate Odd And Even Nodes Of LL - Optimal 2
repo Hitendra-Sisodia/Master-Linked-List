@@ -19,4 +19,4 @@ public:
     ListNode* oddEvenList(ListNode* head) {
         return segregateEvenAndOdd(head);
     }
-};Segrregate Odd And Even Nodes Of LL
+};
