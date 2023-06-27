@@ -1,0 +1,16 @@
+class Solution {
+public:
+    // Optimal Approach 2 TC = O(M + N) SC = O(1)
+    ListNode *intersectionPointOfnextedList(ListNode *head1, ListNode *head2) {
+        ListNode *copyHead1 = head1;
+        ListNode *copyHead2 = head2;
+        while(head1 != head2){
+            head1 = (head1 == NULL)? copyHead2 : head1 -> next;
+            head2 = (head2 == NULL)? copyHead1 : head2 -> next;
+        }
+        return head1;
+    }
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        return intersectionPointOfnextedList(headA, headB);
+    }
+};
