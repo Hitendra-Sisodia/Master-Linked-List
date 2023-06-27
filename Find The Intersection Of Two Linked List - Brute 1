@@ -1,0 +1,25 @@
+class Solution{
+  public:
+    // Brute Force Approach - Correct But TLE TC = O(M * N) SC = O(1)
+    Node *nextedListIntersection(Node *head1, Node *head2){
+        Node *dummy = new Node(-1);
+        Node *prev = dummy;
+        while(head1 != NULL){
+            Node* current2 = head2;         // Store the original head2
+            while (current2 != NULL) {
+                if(head1->data == current2->data) {
+                    prev->next = current2;
+                    prev = prev->next;
+                    break;
+                }
+                current2 = current2->next;  // Move to the next node in the second list
+            }
+            head1 = head1 -> next;
+        }
+        prev -> next = NULL; // Set the next pointer of the last node to NULL
+        return dummy -> next;
+    }
+    Node* findIntersection(Node* head1, Node* head2) {
+        return nextedListIntersection(head1,head2);
+    }
+};
