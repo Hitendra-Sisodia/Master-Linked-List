@@ -1,0 +1,26 @@
+class Solution{
+  public:
+    // Most Optimal Appraoch TC=O(M + N), SC = O(M) 
+    Node *nextedListIntersection(Node *head1, Node *head2){
+        Node *dummy = new Node(-1);
+        Node *prev = dummy;
+        unordered_set<int> visited;                        // SC = O(M)          
+        while(head2 != NULL) {                            // O(N)
+            visited.insert(head2 -> data);       
+            head2 = head2 -> next;
+        }
+        while(head1 != NULL) {                                         // O(M)
+            if(visited.find(head1 -> data) != visited.end()){  // find and inset in unordered_set takes O(1)
+                prev -> next = head1;
+                prev = prev -> next;
+            }
+            head1 = head1 -> next;
+        }
+        // for marking its last node
+        prev -> next = NULL;
+        return dummy -> next;
+    }
+    Node* findIntersection(Node* head1, Node* head2) {
+        return nextedListIntersection(head1,head2);
+    }
+};
