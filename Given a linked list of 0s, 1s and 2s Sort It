@@ -1,0 +1,61 @@
+/*
+ 
+  Node is defined as
+  struct Node {
+    int data;
+    struct Node *next;
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+
+*/
+class Solution
+{   
+    public:
+    void insertAtTail(Node * &Tail, Node *newNode) {
+        Tail -> next = newNode;
+        Tail = Tail -> next;
+    }
+    Node *segregateZerosOnesTwo(Node *head) {
+        Node* zeroHead = new Node(-1);
+        Node* zeroTail = zeroHead;
+       
+        Node* oneHead = new Node(-1);
+        Node* oneTail = oneHead;
+    
+        Node* twoHead = new Node(-1);
+        Node* twoTail = twoHead;
+        
+        Node *current = head;
+        while(current != NULL) {
+            if(current -> data == 0){
+                insertAtTail(zeroTail, current);
+            }
+            else if(current -> data == 1){
+                insertAtTail(oneTail, current);
+            }
+            else{
+                insertAtTail(twoTail, current);
+            }
+            current = current -> next;
+        }
+        if(oneHead -> next != NULL){
+            zeroTail -> next = oneHead -> next;
+        }
+        else{
+            zeroTail -> next = twoHead -> next;
+        }
+        oneTail -> next = twoHead -> next;
+        twoTail -> next = NULL;
+        
+        // assign new head
+        head = zeroHead -> next;
+        return head;
+    }
+    //Function to sort a nexted list of 0s, 1s and 2s.
+    Node* segregate(Node *head) {
+        return segregateZerosOnesTwo(head);
+    }
+};
