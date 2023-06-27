@@ -1,0 +1,22 @@
+class Solution {
+public:
+    // BruteForce Approach TC = O(M * N) SC = O(1)
+    ListNode *intersectionPointOfLinkedList(ListNode *head1, ListNode *head2) {
+        ListNode *dummy = new ListNode(-1);
+        ListNode *prev = dummy;
+        while(head1 != NULL){
+            ListNode *current = head2;
+            while(current != NULL) {
+                if(head1 == current){
+                    return head1;
+                }
+                current = current -> next;
+            }
+            head1 = head1 -> next;
+        }
+        return NULL;
+    }
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        return intersectionPointOfLinkedList(headA, headB);
+    }
+};
