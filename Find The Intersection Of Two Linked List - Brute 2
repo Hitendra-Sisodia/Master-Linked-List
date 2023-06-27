@@ -1,0 +1,30 @@
+class Solution{
+  public:
+    // brute force 2 approach using set
+    Node *nextedListIntersection(Node *head1, Node *head2){
+        Node *dummy = new Node(-1);
+        Node *prev = dummy;
+        Node *temp = head2;
+        unordered_set<int> visited;
+        while(temp != NULL) {
+            visited.insert(temp -> data);
+            temp = temp -> next;
+        }
+        temp = head1;
+        Node *next = NULL;
+        while(temp != NULL) {
+            next = temp -> next;
+            if(visited.find(temp -> data) != visited.end()){
+                prev -> next = temp;
+                temp -> next = NULL;
+                prev = temp;
+            }
+            temp = next;
+        }
+        
+        return dummy -> next;
+    }
+    Node* findIntersection(Node* head1, Node* head2) {
+        return nextedListIntersection(head1,head2);
+    }
+};
