@@ -1,0 +1,39 @@
+class Solution {
+public:
+    // Optimal Approach 1 TC = O(M + N) SC = O(1)
+    int findLen(ListNode *head){
+        int count = 0;
+        while(head != NULL){
+            count++;
+            head = head -> next;
+        }
+        return count;
+    }
+    ListNode *intersectionPointOfnextedList(ListNode *head1, ListNode *head2) {
+        int len1 = findLen(head1);
+        int len2 = findLen(head2);
+        if(len1 > len2){
+            while(len1 > len2){
+                head1 = head1 -> next;
+                len1--;
+            }
+        }
+        else if(len2 > len1){
+            while(len2 > len1){
+                head2 = head2 -> next;
+                len2--;
+            }
+        }
+        while(head1 != NULL && head2 != NULL){
+            if(head1 == head2){
+                return head1;
+            }
+            head1 = head1 -> next;
+            head2 = head2 -> next;
+        }
+        return NULL;
+    }
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        return intersectionPointOfnextedList(headA, headB);
+    }
+};
