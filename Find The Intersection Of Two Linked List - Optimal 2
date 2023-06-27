@@ -1,0 +1,26 @@
+class Solution{
+  public:
+    // Most Optimal Appraoch 2 TC=O(M + N), SC = O(M) 
+    Node *nextedListIntersection(Node *head1, Node *head2){
+        Node *dummy = new Node(-1);
+        Node *prev = dummy;
+        // unordered map is used to mark node as visited
+        unordered_map<int,bool> visited;
+        while(head2 != NULL){
+            visited[head2 -> data] = true;
+            head2 = head2 -> next;
+        }
+        while(head1 != NULL){
+            if(visited[head1 -> data] == true){
+                prev -> next = head1;
+                prev = prev -> next;
+            }
+            head1 = head1 -> next;
+        }
+        prev -> next = NULL;
+        return dummy -> next;
+    }
+    Node* findIntersection(Node* head1, Node* head2) {
+        return nextedListIntersection(head1,head2);
+    }
+};
