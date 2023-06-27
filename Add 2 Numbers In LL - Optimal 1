@@ -1,0 +1,59 @@
+class Solution
+{
+    public:
+    Node *reverse(Node *head){
+        Node *prev = NULL;
+        Node *current = head;
+        Node *next = NULL;
+        while(current != NULL){
+            next = current -> next;
+            current -> next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
+    }
+    struct Node *sumOfTwoNumbers(struct Node *head1 , struct Node *head2) {
+        Node *temp1 = reverse(head1);
+        Node *temp2 = reverse(head2);
+        
+        int carry = 0;
+        
+        Node *dummy = new Node(-1);
+        Node *prev = dummy;
+        while(temp1 != NULL && temp2 != NULL){
+            int val = temp1 -> data + temp2 -> data + carry;
+            temp1 -> data = (val)%10;
+            prev -> next = temp1;
+            prev = prev -> next;
+            carry = (val)/10;
+            temp1 = temp1 -> next;
+            temp2 = temp2 -> next;
+        }
+        while(temp1 != NULL){
+            int val = temp1 -> data + carry;
+            temp1 -> data = (val)%10;
+            prev -> next = temp1;
+            prev = temp1;
+            carry = val/10;
+            temp1 = temp1 -> next;
+        }
+        while(temp2 != NULL){
+            int val = temp2 -> data + carry;
+            temp2 -> data = (val)%10;
+            prev -> next = temp2;
+            prev = temp2;
+            carry = val/10;
+            temp2 = temp2 -> next;
+        }
+        if(carry > 0){
+            prev -> next = new Node(carry);
+            prev = prev -> next;
+        }
+        dummy -> next = reverse(dummy -> next);
+        return dummy -> next;
+    }
+    struct Node* addTwoLists(struct Node* first, struct Node* second) {
+        return sumOfTwoNumbers(first,second);
+    }
+};
