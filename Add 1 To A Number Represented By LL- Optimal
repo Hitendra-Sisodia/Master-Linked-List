@@ -1,0 +1,37 @@
+class Solution
+{
+    public:
+    Node *reverse(Node *head) {
+        Node *prev = NULL;
+        Node *current = head;
+        Node *next = NULL;
+        while(current != NULL){
+            next = current -> next;
+            current -> next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
+    }
+    Node *addOneToLinkedList(Node *head) {
+        head = reverse(head);
+        Node *temp = head;
+        Node *prev = NULL;
+        int carry = 1;
+        while(temp != NULL) {
+            int val = temp -> data + carry;
+            temp -> data = val % 10;
+            carry = val / 10;
+            prev = temp;
+            temp = temp -> next;
+        }
+        if(carry != NULL){
+            prev -> next = new Node(carry);
+        }
+        head = reverse(head);
+        return head;
+    }
+    Node* addOne(Node *head){
+        return addOneToLinkedList(head);
+    }
+};
