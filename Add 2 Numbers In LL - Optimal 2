@@ -1,0 +1,47 @@
+class Solution
+{
+    public:
+    Node *reverse(Node *head){
+        Node *prev = NULL;
+        Node *current = head;
+        Node *next = NULL;
+        while(current != NULL){
+            next = current -> next;
+            current -> next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
+    }
+    struct Node *sumOfTwoNumbers(struct Node *head1 , struct Node *head2) {
+        // Optimal TC = O(M+N) SC = O(max(M,N))
+        Node *temp1 = reverse(head1);
+        Node *temp2 = reverse(head2);
+        
+        int carry = 0;
+        
+        Node *dummy = new Node(-1);
+        Node *prev = dummy;
+        while(temp1 != NULL || temp2 != NULL){
+            int val = carry;
+            if(temp1 != NULL) val = val + temp1 -> data;
+            if(temp2 != NULL) val = val + temp2 -> data;
+            
+            prev -> next = new Node(val % 10);
+            prev = prev -> next;
+            carry = val / 10;
+            
+            if(temp1 != NULL)  temp1 = temp1 -> next;
+            if(temp2 != NULL) temp2 = temp2 -> next;
+        }
+        if(carry > 0){
+            prev -> next = new Node(carry);
+            prev = prev -> next;
+        }
+        dummy -> next = reverse(dummy -> next);
+        return dummy -> next;
+    }
+    struct Node* addTwoLists(struct Node* first, struct Node* second) {
+        return sumOfTwoNumbers(first,second);
+    }
+};
