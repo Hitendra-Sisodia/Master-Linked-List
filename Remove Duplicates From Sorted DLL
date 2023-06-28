@@ -1,0 +1,21 @@
+class Solution
+{
+public:
+    
+    Node *removeDuplicateOccurances(Node *head) {
+        Node *temp = head;
+        if(head == NULL) return  NULL;
+        while(temp -> next != NULL){
+            if(temp -> data == temp -> next -> data){
+                if(temp -> prev == NULL) head = head -> next;
+                if(temp -> prev != NULL) temp -> prev -> next = temp -> next;
+                if(temp -> next != NULL) temp -> next -> prev = temp -> prev;
+            }
+            temp = temp -> next;
+        }
+        return head;
+    }
+    Node * removeDuplicates(struct Node *head){
+        return removeDuplicateOccurances(head);
+    }
+};
