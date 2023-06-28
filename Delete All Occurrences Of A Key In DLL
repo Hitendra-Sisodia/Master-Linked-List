@@ -1,0 +1,28 @@
+class Solution {
+  public:
+    
+    void deleteAllOccuranceInDoublyLL(Node * &head, int n){
+        Node *temp = head;
+        if(head == NULL){
+            return ;
+        }
+        if(head -> next == NULL && head -> data == n){
+            head = head -> next;
+            return ;
+        }
+        while(temp != NULL){
+            if(temp -> data == n){
+                if(temp -> prev == NULL){
+                    temp -> next -> prev = NULL;
+                    head = temp -> next;
+                }
+                if(temp -> prev != NULL) temp -> prev -> next = temp -> next;
+                if(temp -> next != NULL) temp -> next -> prev = temp -> prev;
+            }
+            temp = temp -> next;
+        }
+    }
+    void deleteAllOccurOfX(struct Node** head_ref, int x) {
+        deleteAllOccuranceInDoublyLL(*head_ref,x);
+    }
+};
