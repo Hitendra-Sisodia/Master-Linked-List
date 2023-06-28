@@ -1,0 +1,28 @@
+class Solution
+{
+public:
+    vector<pair<int,int> > pairWithGivenSum(Node *head,int target) {
+        vector<pair<int,int> > ans;
+        Node *temp1 = head;
+        Node *temp2 = head;
+        while(temp2->next != NULL)temp2 = temp2 -> next;   // reaches to last node
+        while(temp1 -> data < temp2 -> data){
+            if(temp1 -> data + temp2 -> data == target){
+                ans.push_back(make_pair(temp1 -> data,temp2 -> data));
+                temp1 = temp1 -> next;
+                temp2 = temp2 -> prev;
+            }
+            else if(temp1 -> data+ temp2 -> data < target){
+                temp1 = temp1 -> next;
+            }
+            else if(temp1 -> data + temp2 -> data > target){
+                temp2 = temp2 -> prev;
+            }
+        }
+        return ans;
+    }
+    vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target)
+    {
+        return pairWithGivenSum(head,target);
+    }
+};
