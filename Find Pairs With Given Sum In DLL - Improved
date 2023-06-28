@@ -1,0 +1,20 @@
+class Solution
+{
+public:
+    vector<pair<int,int> > pairWithGivenSum(Node *head,int target) {
+        vector<pair<int,int> > ans;
+        unordered_set<int> visited;
+        Node *temp = head;
+        while(temp != NULL) {
+            if(visited.find(target - (temp -> data)) != visited.end()) ans.push_back(make_pair(target - (temp-> data),(temp -> data)));
+            visited.insert(temp -> data);
+            temp = temp -> next;
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+    vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target)
+    {
+        return pairWithGivenSum(head,target);
+    }
+};
