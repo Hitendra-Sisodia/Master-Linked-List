@@ -1,0 +1,22 @@
+class Solution{
+    public:
+    Node *copyLinkedList(Node *head) {
+        // extra space used TC:O(N)  SC:O(N)
+        Node *temp = head;
+        unordered_map<Node *, Node *> m;
+        while(temp != NULL){
+            m[temp] = new Node(temp -> data);
+            temp = temp -> next;
+        }
+        temp = head;
+        while(temp != NULL){
+            m[temp] -> next = m[temp -> next];
+            m[temp] -> arb = m[temp -> arb];
+            temp = temp -> next;
+        }
+        return m[head];
+    }
+    Node *copyList(Node *head){
+        return copyLinkedList(head);
+    }
+};
