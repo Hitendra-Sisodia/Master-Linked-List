@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int findlen(ListNode *head){
+        ListNode *temp = head;
+        int count = 0;
+        while(temp != NULL) {
+            count++;
+            temp = temp -> next;
+        }
+        return count;
+    }
+    // Brute 2 while cal len of linked list
+    int convertDecimalToBonary(ListNode *head) {
+        int len = findlen(head);
+        int ans = 0;
+        ListNode *temp = head;
+        while(temp != NULL && len--){
+            ans += (temp -> val) * pow(2,len);
+            temp = temp -> next;
+        }
+        return ans;
+    }
+    int getDecimalValue(ListNode* head) {
+        return convertDecimalToBonary(head);  
+    }
+};
