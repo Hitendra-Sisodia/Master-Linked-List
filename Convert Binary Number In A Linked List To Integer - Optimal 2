@@ -1,0 +1,16 @@
+class Solution {
+public:
+    // Optimal 2 Bit Manipulation
+    int convertDecimalToBonary(ListNode *head) {
+        int ans = 0;
+        ListNode *temp = head;
+        while(temp != NULL) {
+            ans = (ans << 1) | temp -> val;
+            temp = temp -> next;
+        }
+        return ans;
+    }
+    int getDecimalValue(ListNode* head) {
+        return convertDecimalToBonary(head);  
+    }
+};
