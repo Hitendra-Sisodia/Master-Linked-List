@@ -1,0 +1,32 @@
+class Solution {
+public:
+    // Brute force approach
+    ListNode *reverse(ListNode *head) {
+        ListNode *prev = NULL;
+        ListNode *current = head;
+        ListNode *next = head;
+        while(current != NULL) {
+            next = current -> next;
+            current -> next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
+    }
+    int convertDecimalToBonary(ListNode *head) {
+        head = reverse(head);
+
+        int ans = 0;
+        int i = 0;
+        ListNode *temp = head;
+        while(temp != NULL){
+            ans += temp -> val * pow(2,i);
+            temp = temp -> next;
+            i++;
+        }
+        return ans;
+    }
+    int getDecimalValue(ListNode* head) {
+        return convertDecimalToBonary(head);  
+    }
+};
