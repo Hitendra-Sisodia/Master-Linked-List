@@ -1,0 +1,42 @@
+Node *merge(Node *head1 , Node *head2) {
+    Node *dummy = new Node(-1);
+    Node *temp = dummy;
+    
+    Node *cloneHead1 = head1;
+    Node *cloneHead2 = head2;
+    
+    while(cloneHead1 != NULL && cloneHead2 != NULL){
+        if(cloneHead1 -> data <= cloneHead2 -> data) {
+            temp -> bottom = cloneHead1;
+            temp = cloneHead1;
+            cloneHead1 = cloneHead1 -> bottom;
+        }
+        else{
+            temp -> bottom = cloneHead2;
+            temp = cloneHead2;
+            cloneHead2 = cloneHead2 -> bottom;
+        }
+    }
+    if(cloneHead1 != NULL){
+        temp -> bottom = cloneHead1;
+    }
+    if(cloneHead2 != NULL){
+        temp -> bottom = cloneHead2;
+    }
+    return dummy -> bottom;
+}
+
+Node *flattenLinkedList(Node *head) {
+    if(head == NULL || head -> next == NULL){
+        return head;
+    }
+    Node *head1 = head;
+    Node *head2 = flattenLinkedList(head -> next);
+    head1 -> next = NULL;
+    Node *newHead = merge(head1,head2);
+    
+    return newHead;
+}
+Node *flatten(Node *root) {
+   return flattenLinkedList(root);
+}
