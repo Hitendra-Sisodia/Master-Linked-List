@@ -1,0 +1,11 @@
+class Solution {
+  public:
+    void bitManipulation(int num, int i) {
+        // 1 << i act as mask
+        --i;
+        int getBit = ((num & (1 << i)) == NULL) ? 0 : 1;
+        int setBit = num | (1 << i);
+        int clearBit = num & ~(1 << i);
+        cout<<getBit<<" "<<setBit<<" "<<clearBit;
+    }
+};
